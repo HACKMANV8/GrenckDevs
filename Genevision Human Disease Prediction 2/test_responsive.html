@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrenckDevs - Responsive Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.4.0/remixicon.css">
+    <link rel="stylesheet" href="assets/css/genetic_styles.css">
+</head>
+<body>
+    <!-- Navigation bar removed for cleaner design -->
+
+    <!--==================== MAIN ====================-->
+    <main class="main">
+        <!--==================== HOME ====================-->
+        <section class="home section" id="home">
+            <div class="home__container container">
+                <div class="home__content">
+                    <h2 class="home__subtitle">ADVANCED GENETIC ANALYSIS</h2>
+                    <h1 class="home__title">
+                        Genetic Disorder <br>
+                        Prediction Platform
+                    </h1>
+                    <p class="home__description">
+                        Analyze genetic inheritance patterns and predict disorder probabilities with cutting-edge computational genetics.
+                    </p>
+                    <a href="#analysis" class="home__button">
+                        Start Analysis <i class="ri-arrow-right-line"></i>
+                    </a>
+                </div>
+
+                <div class="home__images">
+                    <div class="home__img">
+                        <img src="assets/img/logo.png" alt="GrenckDevs Logo" class="home__logo">
+                        <i class="ri-dna-line home__icon"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== ANALYSIS ====================-->
+        <section class="analysis section" id="analysis">
+            <div class="analysis__container container">
+                <div class="section__data">
+                    <h2 class="section__subtitle">GENETIC CONFIGURATION</h2>
+                    <h1 class="section__title">Analysis Parameters</h1>
+                    <p class="section__description">
+                        Configure your genetic analysis by providing parental information and disorder selection.
+                    </p>
+                </div>
+
+                <div class="analysis__content">
+                    <form class="analysis__form">
+                        <div class="form__group">
+                            <label class="form__label">
+                                <i class="ri-virus-line"></i>
+                                Select Genetic Disorder
+                            </label>
+                            <select class="form__select">
+                                <option>Cystic Fibrosis</option>
+                                <option>Sickle Cell Anemia</option>
+                            </select>
+                        </div>
+
+                        <div class="parents__container">
+                            <div class="parent__card">
+                                <h3 class="parent__title">
+                                    <i class="ri-user-line"></i>
+                                    Parent 1 Profile
+                                </h3>
+                                
+                                <div class="form__group">
+                                    <label class="form__label">Biological Sex</label>
+                                    <div class="radio__group">
+                                        <label class="radio__label">
+                                            <input type="radio" name="parent1_sex" value="MALE">
+                                            <span class="radio__custom"></span>
+                                            <i class="ri-men-line"></i> Male
+                                        </label>
+                                        <label class="radio__label">
+                                            <input type="radio" name="parent1_sex" value="FEMALE">
+                                            <span class="radio__custom"></span>
+                                            <i class="ri-women-line"></i> Female
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form__group">
+                                    <label class="form__label">
+                                        <i class="ri-dna-line"></i>
+                                        Genotype
+                                    </label>
+                                    <input type="text" class="form__input" placeholder="e.g., CC, CT, TT">
+                                </div>
+                            </div>
+
+                            <div class="parent__card">
+                                <h3 class="parent__title">
+                                    <i class="ri-user-line"></i>
+                                    Parent 2 Profile
+                                </h3>
+                                
+                                <div class="form__group">
+                                    <label class="form__label">Biological Sex</label>
+                                    <div class="radio__group">
+                                        <label class="radio__label">
+                                            <input type="radio" name="parent2_sex" value="MALE">
+                                            <span class="radio__custom"></span>
+                                            <i class="ri-men-line"></i> Male
+                                        </label>
+                                        <label class="radio__label">
+                                            <input type="radio" name="parent2_sex" value="FEMALE">
+                                            <span class="radio__custom"></span>
+                                            <i class="ri-women-line"></i> Female
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form__group">
+                                    <label class="form__label">
+                                        <i class="ri-dna-line"></i>
+                                        Genotype
+                                    </label>
+                                    <input type="text" class="form__input" placeholder="e.g., CC, CT, TT">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form__actions">
+                            <button type="button" class="btn btn__primary">
+                                <i class="ri-dna-line"></i>
+                                Run Analysis
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="assets/js/genetic_main.js"></script>
+</body>
+</html>

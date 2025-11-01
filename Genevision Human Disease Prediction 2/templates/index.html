@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrenckDevs Genetic Analysis Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Analyzing genetic data...</p>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Hero Header -->
+        <header class="hero-header">
+            <h1 class="hero-title">GrenckDevs Genetic Analysis</h1>
+            <p class="hero-subtitle">Advanced Genetic Disorder Prediction & Family Planning Insights</p>
+        </header>
+
+        <!-- Main Analysis Form -->
+        <div class="medical-card">
+            <h2 class="section-title">Genetic Analysis Configuration</h2>
+            
+            <form id="geneticForm">
+                <!-- Disorder Selection -->
+                <div class="form-group">
+                    <label for="disorder">Select Genetic Disorder</label>
+                    <select id="disorder" name="disorder" required>
+                        <option value="">Select a disorder</option>
+                        <option value="Cystic Fibrosis">Cystic Fibrosis</option>
+                        <option value="Sickle Cell Anemia">Sickle Cell Anemia</option>
+                        <option value="Huntington's Disease">Huntington's Disease</option>
+                        <option value="Duchenne Muscular Dystrophy">Duchenne Muscular Dystrophy</option>
+                        <option value="Tay-Sachs Disease">Tay-Sachs Disease</option>
+                        <option value="Marfan Syndrome">Marfan Syndrome</option>
+                        <option value="Hemophilia A">Hemophilia A</option>
+                        <option value="Familial Hypercholesterolemia">Familial Hypercholesterolemia</option>
+                        <option value="BRCA-Related Breast Cancer">BRCA-Related Breast Cancer</option>
+                        <option value="Alpha-1 Antitrypsin Deficiency">Alpha-1 Antitrypsin Deficiency</option>
+                    </select>
+                </div>
+
+                <!-- Parent Information -->
+                <div class="parents-container">
+                    <!-- Parent 1 -->
+                    <div class="parent-section">
+                        <h3 class="parent-title">Parent 1 Profile</h3>
+                        
+                        <div class="form-group">
+                            <label>Biological Sex</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="parent1_sex" value="MALE" required>
+                                    <span class="radio-custom"></span>
+                                    Male
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="parent1_sex" value="FEMALE" required>
+                                    <span class="radio-custom"></span>
+                                    Female
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="parent1_genotype">Genotype</label>
+                            <input type="text" id="parent1_genotype" name="parent1_genotype" 
+                                   placeholder="e.g., CC, CT, TT" maxlength="2" required>
+                            <small class="help-text">Enter the genetic variant (allele combination)</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="parent1_affected">
+                                <span class="checkbox-custom"></span>
+                                Currently Affected by Disorder
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Parent 2 -->
+                    <div class="parent-section">
+                        <h3 class="parent-title">Parent 2 Profile</h3>
+                        
+                        <div class="form-group">
+                            <label>Biological Sex</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="parent2_sex" value="MALE" required>
+                                    <span class="radio-custom"></span>
+                                    Male
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="parent2_sex" value="FEMALE" required>
+                                    <span class="radio-custom"></span>
+                                    Female
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="parent2_genotype">Genotype</label>
+                            <input type="text" id="parent2_genotype" name="parent2_genotype" 
+                                   placeholder="e.g., CC, CT, TT" maxlength="2" required>
+                            <small class="help-text">Enter the genetic variant (allele combination)</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="parent2_affected">
+                                <span class="checkbox-custom"></span>
+                                Currently Affected by Disorder
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generations Input -->
+                <div class="form-group">
+                    <label for="generations">Number of Generations to Simulate</label>
+                    <input type="number" id="generations" name="generations" min="1" max="10" value="1" required>
+                    <small class="help-text">Specify how many future generations to analyze</small>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-dna"></i> Run Analysis
+                    </button>
+                    <button type="button" id="exportBtn" class="btn btn-secondary" disabled>
+                        <i class="fas fa-file-pdf"></i> Export Report
+                    </button>
+                    <button type="button" id="clearBtn" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Clear Data
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsSection" class="results-section" style="display: none;">
+            <h2 class="section-title">Analysis Results</h2>
+            
+            <div class="success-message">
+                <i class="fas fa-check-circle"></i>
+                Genetic analysis completed successfully!
+            </div>
+
+            <div class="results-grid">
+                <div class="result-card">
+                    <h4>Genetic Disorder Analyzed</h4>
+                    <p id="resultDisorder" class="result-value"></p>
+                </div>
+                
+                <div class="result-card">
+                    <h4>First Generation Risk Probability</h4>
+                    <p id="resultProbability" class="result-value probability"></p>
+                </div>
+                
+                <div class="result-card">
+                    <h4>Analysis Parameters</h4>
+                    <div id="resultParameters" class="result-parameters"></div>
+                </div>
+            </div>
+
+            <div class="visualization-section">
+                <h4>Genetic Inheritance Visualization</h4>
+                <div class="image-container">
+                    <img id="punnettImage" src="" alt="Punnett Square Family Tree Analysis" class="punnett-image">
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Section -->
+        <div id="errorSection" class="error-section" style="display: none;">
+            <h3><i class="fas fa-exclamation-triangle"></i> Analysis Errors</h3>
+            <ul id="errorList"></ul>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p><strong>GrenckDevs Genetic Analysis Platform</strong></p>
+                <p>Advanced computational genetics • Evidence-based predictions • Secure data processing</p>
+                <p class="disclaimer">
+                    This tool provides educational insights based on genetic modeling. 
+                    Always consult with qualified genetic counselors and healthcare professionals for medical decisions.
+                </p>
+                <p class="copyright">
+                    © 2024 GrenckDevs • Contact: grenck.devs@gmail.com
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

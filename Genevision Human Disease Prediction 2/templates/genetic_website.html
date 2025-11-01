@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--=============== FAVICON ===============-->
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+    <!--=============== REMIXICONS ===============-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.4.0/remixicon.css" crossorigin="">
+    
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/genetic_styles.css') }}">
+
+    <title>GrenckDevs Genetic Analysis Platform</title>
+</head>
+<body>
+    <!-- Navigation bar removed for cleaner design -->
+
+    <!--==================== MAIN ====================-->
+    <main class="main">
+        <!--==================== HOME ====================-->
+        <section class="home section" id="home">
+            <div class="home__container container">
+                <div class="home__content">
+                    <h2 class="home__subtitle">ADVANCED GENETIC ANALYSIS</h2>
+                    <h1 class="home__title">
+                        Genetic Disorder <br>
+                        Prediction Platform
+                    </h1>
+                    <p class="home__description">
+                        Analyze genetic inheritance patterns and predict disorder probabilities with cutting-edge computational genetics.
+                    </p>
+                    <a href="#analysis" class="home__button">
+                        Start Analysis <i class="ri-arrow-right-line"></i>
+                    </a>
+                </div>
+
+                <div class="home__images">
+                    <div class="home__img">
+                        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="GrenckDevs Logo" class="home__logo">
+                        <i class="ri-dna-line home__icon"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== ANALYSIS ====================-->
+        <section class="analysis section" id="analysis">
+            <div class="analysis__container container">
+                <div class="section__data">
+                    <h2 class="section__subtitle">GENETIC CONFIGURATION</h2>
+                    <h1 class="section__title">Analysis Parameters</h1>
+                    <p class="section__description">
+                        Configure your genetic analysis by providing parental information and disorder selection.
+                    </p>
+                </div>
+
+                <div class="analysis__content">
+                    <!-- Loading Overlay -->
+                    <div id="loadingOverlay" class="loading__overlay">
+                        <div class="loading__spinner">
+                            <div class="spinner"></div>
+                            <p>Analyzing genetic data...</p>
+                        </div>
+                    </div>
+
+                    <form id="geneticForm" class="analysis__form">
+                        <!-- Disorder Selection -->
+                        <div class="form__group">
+                            <label for="disorder" class="form__label">
+                                <i class="ri-virus-line"></i>
+                                Select Genetic Disorder
+                            </label>
+                            <select id="disorder" name="disorder" class="form__select" required>
+                                <option value="">Choose a disorder</option>
+                                <option value="Cystic Fibrosis">Cystic Fibrosis</option>
+                                <option value="Sickle Cell Anemia">Sickle Cell Anemia</option>
+                                <option value="Huntington's Disease">Huntington's Disease</option>
+                                <option value="Duchenne Muscular Dystrophy">Duchenne Muscular Dystrophy</option>
+                                <option value="Tay-Sachs Disease">Tay-Sachs Disease</option>
+                                <option value="Marfan Syndrome">Marfan Syndrome</option>
+                                <option value="Hemophilia A">Hemophilia A</option>
+                                <option value="Familial Hypercholesterolemia">Familial Hypercholesterolemia</option>
+                                <option value="BRCA-Related Breast Cancer">BRCA-Related Breast Cancer</option>
+                                <option value="Alpha-1 Antitrypsin Deficiency">Alpha-1 Antitrypsin Deficiency</option>
+                            </select>
+                        </div>
+
+                        <!-- Parents Container -->
+                        <div class="parents__container">
+                            <!-- Parent 1 -->
+                            <div class="parent__card">
+                                <h3 class="parent__title">
+                                    <i class="ri-user-line"></i>
+                                    Parent 1 Profile
+                                </h3>
+                                
+                                <div class="form__group">
+                                    <label class="form__label">Biological Sex</label>
+                                    <div class="radio__group">
+                                        <label class="radio__label">
+                                            <input type="radio" name="parent1_sex" value="MALE" required>
+                                            <span class="radio__custom"></span>
+                                            <i class="ri-men-line"></i> Male
+                                        </label>
+                                        <label class="radio__label">
+                                            <input type="radio" name="parent1_sex" value="FEMALE" required>
+                                            <span class="radio__custom"></span>
+                                            <i class="ri-women-line"></i> Female
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form__group">
+                                    <label for="parent1_genotype" class="form__label">
+                                        <i class="ri-dna-line"></i>
+                                        Genotype
+                                    </label>
+                                    <input type="text" id="parent1_genotype" name="parent1_genotype" 
+                                           class="form__input" placeholder="e.g., CC, CT, TT" maxlength="2" required>
+                                    <small class="form__help">Enter genetic variant (allele combination)</small>
+                                </div>
+
+                                <div class="form__group">
+                                    <label class="checkbox__label">
+                                        <input type="checkbox" name="parent1_affected">
+                                        <span class="checkbox__custom"></span>
+                                        <i class="ri-heart-pulse-line"></i>
+                                        Currently Affected by Disorder
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Parent 2 -->
+                            <div class="parent__card">
+                                <h3 class="parent__title">
+                                    <i class="ri-user-line"></i>
+                                    Parent 2 Profile
+                                </h3>
+                                
+                                <div class="form__group">
+                                    <label class="form__label">Biological Sex</label>
+                                    <div class="radio__group">
+                                        <label class="radio__label">
+                                            <input type="radio" name="parent2_sex" value="MALE" required>
+                                            <span class="radio__custom"></span>
+                                            <i class="ri-men-line"></i> Male
+                                        </label>
+                                        <label class="radio__label">
+                                            <input type="radio" name="parent2_sex" value="FEMALE" required>
+                                            <span class="radio__custom"></span>
+                                            <i class="ri-women-line"></i> Female
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form__group">
+                                    <label for="parent2_genotype" class="form__label">
+                                        <i class="ri-dna-line"></i>
+                                        Genotype
+                                    </label>
+                                    <input type="text" id="parent2_genotype" name="parent2_genotype" 
+                                           class="form__input" placeholder="e.g., CC, CT, TT" maxlength="2" required>
+                                    <small class="form__help">Enter genetic variant (allele combination)</small>
+                                </div>
+
+                                <div class="form__group">
+                                    <label class="checkbox__label">
+                                        <input type="checkbox" name="parent2_affected">
+                                        <span class="checkbox__custom"></span>
+                                        <i class="ri-heart-pulse-line"></i>
+                                        Currently Affected by Disorder
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Generations Input -->
+                        <div class="form__group">
+                            <label for="generations" class="form__label">
+                                <i class="ri-family-line"></i>
+                                Number of Generations to Simulate
+                            </label>
+                            <input type="number" id="generations" name="generations" 
+                                   class="form__input" min="1" max="10" value="1" required>
+                            <small class="form__help">Specify how many future generations to analyze</small>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="form__actions">
+                            <button type="submit" class="btn btn__primary">
+                                <i class="ri-dna-line"></i>
+                                Run Analysis
+                            </button>
+                            <button type="button" id="exportBtn" class="btn btn__secondary" disabled>
+                                <i class="ri-file-pdf-line"></i>
+                                Export Report
+                            </button>
+                            <button type="button" id="clearBtn" class="btn btn__danger">
+                                <i class="ri-delete-bin-line"></i>
+                                Clear Data
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Results Section -->
+                    <div id="resultsSection" class="results__section" style="display: none;">
+                        <div class="section__data">
+                            <h2 class="section__subtitle">ANALYSIS COMPLETE</h2>
+                            <h1 class="section__title">Genetic Results</h1>
+                        </div>
+
+                        <div class="success__message">
+                            <i class="ri-checkbox-circle-line"></i>
+                            Genetic analysis completed successfully!
+                        </div>
+
+                        <div class="results__grid">
+                            <div class="result__card">
+                                <div class="result__icon">
+                                    <i class="ri-virus-line"></i>
+                                </div>
+                                <h4 class="result__title">Disorder Analyzed</h4>
+                                <p id="resultDisorder" class="result__value"></p>
+                            </div>
+                            
+                            <div class="result__card">
+                                <div class="result__icon">
+                                    <i class="ri-percent-line"></i>
+                                </div>
+                                <h4 class="result__title">Risk Probability</h4>
+                                <p id="resultProbability" class="result__value result__probability"></p>
+                            </div>
+                            
+                            <div class="result__card">
+                                <div class="result__icon">
+                                    <i class="ri-settings-line"></i>
+                                </div>
+                                <h4 class="result__title">Parameters</h4>
+                                <div id="resultParameters" class="result__parameters"></div>
+                            </div>
+                        </div>
+
+                        <div class="visualization__section">
+                            <h4 class="visualization__title">
+                                <i class="ri-family-tree-line"></i>
+                                Genetic Inheritance Visualization
+                            </h4>
+                            <div class="visualization__container">
+                                <img id="punnettImage" src="" alt="Punnett Square Analysis" class="punnett__image">
+                            </div>
+                        </div>
+
+                        <!-- Enhanced Visualizations Section -->
+                        <div id="enhancedVisualizationsSection" class="enhanced__visualizations" style="display: none;">
+                            <div class="section__data">
+                                <h2 class="section__subtitle">ENHANCED ANALYTICS</h2>
+                                <h1 class="section__title">
+                                    <i class="ri-bar-chart-line"></i>
+                                    Advanced Visualizations & Protein Structure
+                                </h1>
+                                <p class="section__description">
+                                    Interactive charts, risk analytics, and 3D protein structure visualization powered by AlphaFold
+                                </p>
+                            </div>
+                            
+                            <div id="enhancedVisualizationsContent" class="enhanced__content">
+                                <!-- Enhanced visualizations will be loaded here -->
+                            </div>
+                            
+                            <div class="visualization__controls">
+                                <button type="button" id="toggleChartsBtn" class="btn btn__secondary">
+                                    <i class="ri-eye-line"></i>
+                                    Toggle Individual Charts
+                                </button>
+                                <button type="button" id="proteinStructureBtn" class="btn btn__primary">
+                                    <i class="ri-3d-view-line"></i>
+                                    View Protein Structure
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Error Section -->
+                    <div id="errorSection" class="error__section" style="display: none;">
+                        <h3 class="error__title">
+                            <i class="ri-error-warning-line"></i>
+                            Analysis Errors
+                        </h3>
+                        <ul id="errorList" class="error__list"></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== ABOUT ====================-->
+        <section class="about section" id="about">
+            <div class="about__container container">
+                <div class="section__data">
+                    <h2 class="section__subtitle">ABOUT GRENCKDEVS</h2>
+                    <h1 class="section__title">Advanced Genetic Analysis</h1>
+                    <p class="section__description">
+                        Our platform uses cutting-edge computational genetics to provide accurate genetic disorder predictions and family planning insights.
+                    </p>
+                </div>
+
+                <div class="about__content">
+                    <div class="about__card">
+                        <i class="ri-dna-line about__icon"></i>
+                        <h3 class="about__title">Genetic Modeling</h3>
+                        <p class="about__description">Advanced machine learning models trained on comprehensive genetic datasets.</p>
+                    </div>
+
+                    <div class="about__card">
+                        <i class="ri-shield-check-line about__icon"></i>
+                        <h3 class="about__title">Secure & Private</h3>
+                        <p class="about__description">Your genetic data is processed securely and never stored permanently.</p>
+                    </div>
+
+                    <div class="about__card">
+                        <i class="ri-file-chart-line about__icon"></i>
+                        <h3 class="about__title">Detailed Reports</h3>
+                        <p class="about__description">Comprehensive PDF reports with visualizations and recommendations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== CONTACT ====================-->
+        <section class="contact section" id="contact">
+            <div class="contact__container container">
+                <div class="section__data">
+                    <h2 class="section__subtitle">GET IN TOUCH</h2>
+                    <h1 class="section__title">Contact GrenckDevs</h1>
+                    <p class="section__description">
+                        Have questions about genetic analysis? Our team of experts is here to help.
+                    </p>
+                </div>
+
+                <div class="contact__content">
+                    <div class="contact__info">
+                        <div class="contact__card">
+                            <i class="ri-mail-line contact__icon"></i>
+                            <h3 class="contact__title">Email</h3>
+                            <p class="contact__description">grenck.devs@gmail.com</p>
+                        </div>
+
+                        <div class="contact__card">
+                            <i class="ri-phone-line contact__icon"></i>
+                            <h3 class="contact__title">Phone</h3>
+                            <p class="contact__description">+91 1234567890</p>
+                        </div>
+
+                        <div class="contact__card">
+                            <i class="ri-map-pin-line contact__icon"></i>
+                            <h3 class="contact__title">Location</h3>
+                            <p class="contact__description">Genetic Research Center</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!--==================== FOOTER ====================-->
+    <footer class="footer">
+        <div class="footer__container container">
+            <div class="footer__content">
+                <div class="footer__data">
+                    <h3 class="footer__title">
+                        <i class="ri-dna-line"></i>
+                        GrenckDevs
+                    </h3>
+                    <p class="footer__description">
+                        Advanced computational genetics for better healthcare decisions.
+                    </p>
+                </div>
+
+                <div class="footer__data">
+                    <h3 class="footer__title">Services</h3>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">Genetic Analysis</a></li>
+                        <li><a href="#" class="footer__link">Risk Assessment</a></li>
+                        <li><a href="#" class="footer__link">Family Planning</a></li>
+                        <li><a href="#" class="footer__link">Genetic Counseling</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__data">
+                    <h3 class="footer__title">Support</h3>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">Documentation</a></li>
+                        <li><a href="#" class="footer__link">FAQ</a></li>
+                        <li><a href="#" class="footer__link">Contact</a></li>
+                        <li><a href="#" class="footer__link">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer__info">
+                <p class="footer__copy">
+                    © 2024 GrenckDevs. All rights reserved. 
+                    This tool provides educational insights. Always consult healthcare professionals.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!--=============== ENHANCED VISUALIZATIONS ===============-->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!--=============== SCROLLREVEAL ===============-->
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <!--=============== MAIN JS ===============-->
+    <script src="{{ url_for('static', filename='js/genetic_main.js') }}"></script>
+    
+    <!--=============== ENHANCED VISUALIZATIONS JS ===============-->
+    <script src="{{ url_for('static', filename='js/enhanced_visualizations.js') }}"></script>
+</body>
+</html>
